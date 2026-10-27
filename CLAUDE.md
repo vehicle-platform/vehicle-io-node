@@ -1,8 +1,8 @@
-# CLAUDE.md — moto-io-node
+# CLAUDE.md — vehicle-io-node
 
 @.claude/PLATFORM-RULES.md
 
-> **RETIRED by D-072 (2026-10-17).** There is no separate I/O node any more: blind spot and immobilizer moved to `moto-safety-node` (the Cortex-M4 safety partition of the STM32H755), power management and park mode to `moto-rt-core` (Cortex-M7). This repo holds no code and stays as it is until it is archived. The text below is the original plan, kept for reference.
+> **RETIRED by D-072 (2026-10-17).** There is no separate I/O node any more: blind spot and immobilizer moved to `vehicle-safety-node` (the Cortex-M4 safety partition of the STM32H755), power management and park mode to `vehicle-rt-core` (Cortex-M7). This repo holds no code and stays as it is until it is archived. The text below is the original plan, kept for reference.
 
 ## What this repo is
 
@@ -13,8 +13,8 @@ A combined zone-controller firmware running on **STM32G0** (G0B1 class; prototyp
 
 ## What this repo is NOT
 
-- The cornering decision is not here (`moto-safety-node`). EKF is not here (`moto-rt-core`).
-- Wi-Fi/GSM transmission is not here: the park alarm is relayed to `moto-connectivity-node` over the platform CAN.
+- The cornering decision is not here (`vehicle-safety-node`). EKF is not here (`vehicle-rt-core`).
+- Wi-Fi/GSM transmission is not here: the park alarm is relayed to `vehicle-connectivity-node` over the platform CAN.
 - The blind spot system is not connected to the AI assistant. It needs reflex speed; the right interface is an LED.
 
 ## Safety-critical rules (no exceptions)
@@ -31,7 +31,7 @@ The F103 is a prototype only: 20 KB RAM, a single bxCAN, classic CAN. Code is wr
 
 ## Dependencies
 
-`external/moto-vehicle-defs` (tagged), only `gen/c/io/`. Connected only to the platform bus. Turn-signal state comes from the platform bus or directly from GPIO.
+`external/vehicle-defs` (tagged), only `gen/c/io/`. Connected only to the platform bus. Turn-signal state comes from the platform bus or directly from GPIO.
 
 ## Build
 
@@ -39,4 +39,4 @@ CMake + STM32CubeMX + arm-none-eabi-gcc (D-007), bare-metal (D-012). Decision lo
 
 ## Context
 
-ARCHITECTURE §2-4 · `../moto-vehicle-defs/docs/hardware-architecture.md` §5b.1, §5b.3.
+ARCHITECTURE §2-4 · `../vehicle-defs/docs/hardware-architecture.md` §5b.1, §5b.3.

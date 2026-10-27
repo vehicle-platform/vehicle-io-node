@@ -1,18 +1,18 @@
-# moto-io-node
+# vehicle-io-node
 
-Part of [moto-platform](https://github.com/moto-platform), an SDV-style diagnostics, telemetry and rider-assistance platform for motorcycles (first vehicle: Honda CL250).
+Part of [vehicle-platform](https://github.com/vehicle-platform), an SDV-style diagnostics, telemetry and rider-assistance platform for motorcycles (first vehicle: Honda CL250).
 
-> **RETIRED by D-072 (2026-10-17).** There is no separate I/O node any more: blind spot and immobilizer moved to `moto-safety-node` (the Cortex-M4 safety partition of the STM32H755), power management and park mode to `moto-rt-core` (Cortex-M7). This repo holds no code and stays as it is until it is archived. The text below is the original plan, kept for reference.
+> **RETIRED by D-072 (2026-10-17).** There is no separate I/O node any more: blind spot and immobilizer moved to `vehicle-safety-node` (the Cortex-M4 safety partition of the STM32H755), power management and park mode to `vehicle-rt-core` (Cortex-M7). This repo holds no code and stays as it is until it is archived. The text below is the original plan, kept for reference.
 
 A combined zone-controller firmware running on **STM32G0** (G0B1 class; prototype: the STM32F103 on hand). Three modules live on the same node, each separate under `src/features/`:
 - `blind_spot/`: 2× 24 GHz radar → approach logic → mirror LEDs (green / solid red / blinking red). The decision is made entirely here; only the result is written to CAN.
 - `immobilizer/`: NFC (PN532) primary, handlebar PIN as backup → bistable relay.
 - `power/`: INA226 monitoring, low voltage (<12.2 V) → low-power mode, park mode (IMU wake-on-motion, target <1 mA).
 
-**Status:** skeleton, no code yet. The build system, tests and CI are added by `/repo-bootstrap moto-io-node` when work on this repo starts (setup order: `moto-vehicle-defs/docs/ARCHITECTURE.md` §9).
+**Status:** skeleton, no code yet. The build system, tests and CI are added by `/repo-bootstrap vehicle-io-node` when work on this repo starts (setup order: `vehicle-defs/docs/ARCHITECTURE.md` §9).
 
-- Architecture and decisions: [moto-vehicle-defs/docs](https://github.com/moto-platform/moto-vehicle-defs/tree/main/docs) (`ARCHITECTURE.md`, `DECISIONS.md`)
-- Signals, CAN IDs and DIDs come only from [moto-vehicle-defs](https://github.com/moto-platform/moto-vehicle-defs) (git submodule pinned to a tag)
+- Architecture and decisions: [vehicle-defs/docs](https://github.com/vehicle-platform/vehicle-defs/tree/main/docs) (`ARCHITECTURE.md`, `DECISIONS.md`)
+- Signals, CAN IDs and DIDs come only from [vehicle-defs](https://github.com/vehicle-platform/vehicle-defs) (git submodule pinned to a tag)
 - Scope rules for contributors and Claude Code: [`CLAUDE.md`](CLAUDE.md)
 
 ## License
